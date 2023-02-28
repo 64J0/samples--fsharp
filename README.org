@@ -4,5 +4,20 @@
 
 * Description
 
-This repository is used to host my code submissions in the F# track of the
-Exercism platform: [[https://exercism.org/tracks/fsharp][link]].
+This repository is used to host my code submissions in the [[https://exercism.org/tracks/fsharp][F# track]] of the
+Exercism platform.
+
+* About F#
+
+#+BEGIN_QUOTE
+F# is a universal programming language for writing succinct, robust and
+performant code.
+
+F# allows you to write uncluttered, self-documenting code, where your focus
+remains on your problem domain, rather than the details of programming.
+
+It does this without compromising on speed and compatibility - it is
+open-source, cross-platform and interoperable.
+
+--- [[https://learn.microsoft.com/en-us/dotnet/fsharp/what-is-fsharp][What is F#?]]
+#+END_QUOTE
