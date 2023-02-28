@@ -1,0 +1,8 @@
+#+TITLE: F# - Exercism
+#+AUTHOR: 64J0
+#+DATE: [2023-02-28 ter]
+
+* Description
+
+This repository is used to host my code submissions in the F# track of the
+Exercism platform: [[https://exercism.org/tracks/fsharp][link]].
