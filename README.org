@@ -7,7 +7,7 @@
 This repository is used to host my code submissions in the [[https://exercism.org/tracks/fsharp][F# track]] of the
 Exercism platform.
 
-* About F#
+** About F#
 
 #+BEGIN_QUOTE
 F# is a universal programming language for writing succinct, robust and
