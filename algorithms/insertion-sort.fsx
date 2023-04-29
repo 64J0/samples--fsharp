@@ -8,15 +8,16 @@ let rec insertionSort (arrIn: int array) (arrOut: int array) =
       | _ ->
           let el = Array.head arrIn
           let newArrIn = Array.tail arrIn
-          let indexBiggerNum =
-              arrOut
-              |> Array.tryFindIndex (fun x -> x >= el)
+          let idxBiggerNum = arrOut |> Array.tryFindIndex (fun x -> x >= el)
           let newArrOut =
-              match indexBiggerNum with
+              match idxBiggerNum with
               | Some i ->
-                  Array.concat [ arrOut.[0 .. (i-1)]; [| el |]; arrOut.[i ..] ]
+                  Array.concat [ arrOut.[0 .. (i-1)]
+                                 [| el |]
+                                 arrOut.[i ..] ]
               | None ->
-                  Array.concat [arrOut; [| el |]]
+                  Array.concat [ arrOut
+                                 [| el |] ]
 
           insertionSort (newArrIn) (newArrOut)
 
