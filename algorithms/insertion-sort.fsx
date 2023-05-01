@@ -2,7 +2,7 @@ module InsertionSort
 
 // Recursive implementation of the insertion sort algorithm in F#
 
-let rec insertionSort (arrIn: int array) (arrOut: int array) =
+let rec insertionSort (arrIn: int array) (arrOut: int array): int array =
       match arrIn with
       | [||] -> arrOut
       | _ ->
