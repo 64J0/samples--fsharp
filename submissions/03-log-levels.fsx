@@ -2,21 +2,19 @@ module LogLevels
 
 open System
 
-let messageParts (logLine: string): string * string =
+let messageParts (logLine: string) : string * string =
     match logLine.Split(":") with
-    | [| logLevel; message |] ->
-        (logLevel.Trim(), message.Trim())
+    | [| logLevel; message |] -> (logLevel.Trim(), message.Trim())
     | _ -> failwith "Error parsing logLine"
 
-let message (logLine: string): string =
-    snd (messageParts logLine)
+let message (logLine: string) : string = snd (messageParts logLine)
 
-let logLevel (logLine: string): string =
+let logLevel (logLine: string) : string =
     (fst (messageParts logLine))
     |> String.filter Char.IsLetter
     |> String.map Char.ToLower
 
-let reformat (logLine: string): string =
+let reformat (logLine: string) : string =
     sprintf "%s (%s)" (message logLine) (logLevel logLine)
 
 // Manual tests...

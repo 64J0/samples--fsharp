@@ -1,6 +1,6 @@
 module GuessingGame
 
-let reply (guess: int): string =
+let reply (guess: int) : string =
     match guess with
     | 42 -> "Correct"
     | 41

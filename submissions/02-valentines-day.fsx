@@ -22,7 +22,7 @@ type Activity =
     | Restaurant of Cuisine
     | Walk of kilometers: int
 
-let rateActivity (activity: Activity): Approval =
+let rateActivity (activity: Activity) : Approval =
     match activity with
     | BoardGame -> No
     | Chill -> No

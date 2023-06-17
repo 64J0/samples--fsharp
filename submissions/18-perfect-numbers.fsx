@@ -3,33 +3,40 @@ module PerfectNumbers
 type Classification =
     | Perfect
     | Abundant
-    | Deficient 
+    | Deficient
 
-let rec getAliquotSum (number: int) (state: int) (out: int list): int =
-    if (state = number) then out |> List.sum
-    else
-        match (number % state) with
-        | 0 -> getAliquotSum number (state + 1) (state::out)
-        | _ -> getAliquotSum number (state + 1) out
+let factors (x: int) : List<int> =
+    [ for i in 1 .. x / 2 do
+          if x % i = 0 then
+              yield i ]
 
-let classify (number: int): Classification option =
-    if (number < 1) then None
-    else
-        let aliquotSum = getAliquotSum number 2 [1]
+let classify (n: int) : Option<Classification> =
+    let aliquotSum x = List.sum (factors x)
 
-        if (aliquotSum = number) then Some Classification.Perfect
-        elif (aliquotSum > number) then Some Classification.Abundant
-        else Some Classification.Deficient
+    let classification =
+        function
+        | sum when sum < n -> Deficient
+        | sum when sum > n -> Abundant
+        | _ -> Perfect
+
+    Some n
+    |> Option.filter (fun x -> x > 0)
+    |> Option.map aliquotSum
+    |> Option.map classification
 
 // Perfect:
 classify 6
 classify 28
+classify 33550336
 // Abundant:
 classify 12
 classify 24
+classify 30
+classify 33550335
 // Deficient:
 classify 8
 classify 13
+classify 33550337
 // Wrong input:
 classify 0
 classify -1

@@ -7,7 +7,7 @@ type Pizza =
     | ExtraSauce of Pizza
     | ExtraToppings of Pizza
 
-let rec pizzaPrice (pizza: Pizza): int =
+let rec pizzaPrice (pizza: Pizza) : int =
     match pizza with
     | Margherita -> 7
     | Caprese -> 9
@@ -15,7 +15,7 @@ let rec pizzaPrice (pizza: Pizza): int =
     | ExtraSauce p -> 1 + (pizzaPrice p)
     | ExtraToppings p -> 2 + (pizzaPrice p)
 
-let orderPrice (pizzas: Pizza list): int =
+let orderPrice (pizzas: Pizza list) : int =
     let fee =
         match (List.length pizzas) with
         | 1 -> 3

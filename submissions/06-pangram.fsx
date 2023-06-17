@@ -2,10 +2,8 @@ module Pangram
 
 open System
 
-let isPangram (phrase: string): bool =
-    let expected =
-        ['a' .. 'z']
-        |> Set.ofList
+let isPangram (phrase: string) : bool =
+    let expected = [ 'a' .. 'z' ] |> Set.ofList
 
     let transformedPhraseConstituents =
         phrase

@@ -1,6 +1,6 @@
 module SumArray
 
-let rec sumArray (arrIn: int array) (result: int): int =
+let rec sumArray (arrIn: int array) (result: int) : int =
     match arrIn with
     | [||] -> result
     | _ ->
@@ -8,7 +8,7 @@ let rec sumArray (arrIn: int array) (result: int): int =
         let arrIn' = Array.tail arrIn
         sumArray arrIn' result'
 
-sumArray [| 1 .. 10 |] 0
+sumArray [| 1..10 |] 0
 
 // Initialization:
 // arrIn = [| 1 |] -> result = 1

@@ -2,11 +2,11 @@ module MergeSort
 
 // TODO: refac to avoid mutable values
 
-let merge (A: int array) (p: int) (q: int) (r: int): unit =
+let merge (A: int array) (p: int) (q: int) (r: int) : unit =
     let nL = q - p + 1
     let nR = r - q
-    let L = A.[ p .. (p + nL - 1)]
-    let R = A.[ (q + 1) .. (q + 1 + nR - 1) ]
+    let L = A.[p .. (p + nL - 1)]
+    let R = A.[(q + 1) .. (q + 1 + nR - 1)]
 
     let mutable i = 0
     let mutable j = 0
@@ -19,6 +19,7 @@ let merge (A: int array) (p: int) (q: int) (r: int): unit =
         else
             A.[k] <- R.[j]
             j <- j + 1
+
         k <- k + 1
 
     // Having gone through one of L and R entirely, copy the remainder of the
@@ -27,6 +28,7 @@ let merge (A: int array) (p: int) (q: int) (r: int): unit =
         A.[k] <- L.[i]
         i <- i + 1
         k <- k + 1
+
     while (j < nR) do
         A.[k] <- R.[j]
         j <- j + 1
@@ -39,8 +41,9 @@ let merge (A: int array) (p: int) (q: int) (r: int): unit =
 
 // merge (A) (p) (q) (r)
 
-let rec mergeSort (A: int array) (p: int) (r: int): unit =
-    if (p >= r) then ()
+let rec mergeSort (A: int array) (p: int) (r: int) : unit =
+    if (p >= r) then
+        ()
     else
         let q = (p + r) / 2 // already get the floor value
         mergeSort (A) (p) (q)
