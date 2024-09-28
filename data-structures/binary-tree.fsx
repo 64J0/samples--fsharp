@@ -132,6 +132,13 @@ let main () =
     DFS.traverse t |> Seq.iter (printfn "%d")
 
     // Example provided by CodeRabbit AI
+    // Define the binary tree:
+    //       10
+    //      /  \
+    //     5   15
+    //         /  \
+    //        6   20
+
     let exampleTree =
         Node(
             10,
@@ -145,5 +152,25 @@ let main () =
 
     let result = isBST exampleTree
     printfn "Is the valid tree a BST? %b" result // prints false
+
+    // Define a valid BST:
+    //       10
+    //      /  \
+    //     5   15
+    //         /  \
+    //        12  20
+
+    let validBST =
+        Node(10,
+             Node(5, Empty, Empty),
+             Node(15,
+                  Node(12, Empty, Empty),
+                  Node(20, Empty, Empty)
+                  )
+             )
+
+    // Test the isBST function
+    let validResult = isBST validBST
+    printfn "Is the valid tree a BST? %b" validResult
 
 main ()
