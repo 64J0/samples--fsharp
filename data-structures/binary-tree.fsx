@@ -7,7 +7,7 @@
 // https://theburningmonk.com/2016/12/depth-first-tree-traversal-in-f/
 
 /// Binary tree type definition.
-type Tree<'a when 'a : comparison> =
+type Tree<'a when 'a: comparison> =
     | Empty
     | Node of value: 'a * left: Tree<'a> * right: Tree<'a>
 
@@ -130,5 +130,20 @@ let main () =
 
     printfn "Depth-first traversal:"
     DFS.traverse t |> Seq.iter (printfn "%d")
+
+    // Example provided by CodeRabbit AI
+    let exampleTree =
+        Node(
+            10,
+            Node(5, Empty, Empty),
+            Node(
+                15,
+                Node(6, Empty, Empty), // This node violates the BST property
+                Node(20, Empty, Empty)
+            )
+        )
+
+    let result = isBST exampleTree
+    printfn "Is the valid tree a BST? %b" result // prints false
 
 main ()
