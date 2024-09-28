@@ -7,7 +7,7 @@
 // https://theburningmonk.com/2016/12/depth-first-tree-traversal-in-f/
 
 /// Binary tree type definition.
-type Tree<'a> =
+type Tree<'a when 'a : comparison> =
     | Empty
     | Node of value: 'a * left: Tree<'a> * right: Tree<'a>
 
