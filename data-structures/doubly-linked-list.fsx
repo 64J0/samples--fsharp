@@ -68,6 +68,15 @@ module DLL =
 
     let printForwardList (dlist: DList<'T>) = printForward dlist.front
 
+    let rec printBackward (node: DListAux<'T> option) =
+        match node with
+        | None -> ()
+        | Some n ->
+            printfn "%A" n.data
+            printBackward n.prev
+
+    let printBackwardList (dlist: DList<'T>) = printBackward dlist.back
+
 let main () : int =
     let dll = DLL.empty ()
     printfn "Empty list:"
@@ -92,6 +101,8 @@ let main () : int =
     DLL.printForwardList dll
 
     // Implement and use printBackward here to demonstrate reverse traversal
+    printfn "\nPrinting the second example backwards:"
+    DLL.printBackwardList dll
 
     // Create a new doubly-linked list
     let dlist = DLL.empty ()
