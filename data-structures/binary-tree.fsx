@@ -96,6 +96,34 @@ module BFS =
 
         loop <| seq { yield tree }
 
+    let traverse2 (tree: Tree<'a>) : 'a seq =
+        let rec getNodeValues (acc: 'a list) (nodes: Tree<'a> list) : 'a list =
+            match nodes with
+            | [] -> acc
+            | _ ->
+                let nodes' = []
+
+                let ans =
+                    List.fold
+                        (fun acc n ->
+                            match n with
+                            | Empty -> acc
+                            | Node(value, left, right) ->
+                                let acc' = value :: fst acc
+                                let node' = snd acc @ [ left; right ]
+                                (acc', node'))
+                        (acc, nodes')
+                        nodes
+
+                getNodeValues (fst ans) (snd ans)
+
+        match tree with
+        | Empty -> Seq.empty
+        | Node(value, left, right) ->
+            let acc = [ value ]
+            let nodes = [ left; right ]
+            getNodeValues acc nodes |> List.rev |> List.toSeq
+
 module DFS =
     let traverse (tree: Tree<'a>) : seq<'a> =
         let rec loop (tree: Tree<'a>) =
@@ -122,11 +150,18 @@ let main () =
         |> insert 6
         |> insert 7
         |> insert 3
+        |> insert 11
+        |> insert 15
+        |> insert 4
+        |> insert 8
 
     printfn "Is binary tree? %b" (isBST t)
 
     printfn "Breath-first traversal:"
     BFS.traverse t |> Seq.iter (printfn "%d")
+
+    printfn "Breath-first traversal 2:"
+    BFS.traverse2 t |> Seq.iter (printfn "%d")
 
     printfn "Depth-first traversal:"
     DFS.traverse t |> Seq.iter (printfn "%d")
@@ -161,13 +196,15 @@ let main () =
     //        12  20
 
     let validBST =
-        Node(10,
-             Node(5, Empty, Empty),
-             Node(15,
-                  Node(12, Empty, Empty),
-                  Node(20, Empty, Empty)
-                  )
-             )
+        Node(
+            10,
+            Node(5, Empty, Empty),
+            Node(
+                15,
+                Node(12, Empty, Empty), // This node does violates the BST property
+                Node(20, Empty, Empty)
+            )
+        )
 
     // Test the isBST function
     let validResult = isBST validBST
