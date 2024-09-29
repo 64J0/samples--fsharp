@@ -44,7 +44,7 @@ module DLL =
             dlist.back <- e1
 
     let addAfter (dlist: DList<'T>) (link: DListAux<'T>) (elt: 'T) =
-        if link.next = dlist.back then
+        if link.next = None then
             addBack dlist elt
         else
             let e =
@@ -54,6 +54,10 @@ module DLL =
                       next = link.next }
 
             link.next <- e
+
+            match e.Value.next with
+            | Some nextNode -> nextNode.prev <- e
+            | None -> dlist.back <- e
 
     let rec printForward (node: DListAux<'T> option) =
         match node with
@@ -88,6 +92,24 @@ let main () : int =
     DLL.printForwardList dll
 
     // Implement and use printBackward here to demonstrate reverse traversal
+
+    // Create a new doubly-linked list
+    let dlist = DLL.empty ()
+
+    // Add elements to the list: 1, 2, 3
+    DLL.addBack dlist 1.
+    DLL.addBack dlist 2.
+    DLL.addBack dlist 3.
+
+    // Get reference to the second node (with value 2)
+    let secondNode = dlist.front.Value.next.Value
+
+    // Add 2.5 after the second node
+    DLL.addAfter dlist secondNode 2.5
+
+    // Print the list
+    printfn "\nSecond example:"
+    DLL.printForwardList dlist
 
     0
 
