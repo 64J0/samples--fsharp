@@ -66,14 +66,28 @@ module DLL =
 
 let main () : int =
     let dll = DLL.empty ()
-    DLL.addFront dll 0
+    printfn "Empty list:"
+    DLL.printForwardList dll
+
+    printfn "\nAdding to front:"
     DLL.addFront dll 1
     DLL.addFront dll 2
-    DLL.addFront dll 3
-    DLL.addFront dll 4
-    DLL.addBack dll 16
-    DLL.addBack dll 17
     DLL.printForwardList dll
+
+    printfn "\nAdding to back:"
+    DLL.addBack dll 3
+    DLL.addBack dll 4
+    DLL.printForwardList dll
+
+    printfn "\nAdding after the second element:"
+
+    match dll.front with
+    | Some f when Option.isSome f.next -> DLL.addAfter dll (Option.get f.next) 5
+    | _ -> printfn "List is too short to add after the second element"
+
+    DLL.printForwardList dll
+
+    // Implement and use printBackward here to demonstrate reverse traversal
 
     0
 
