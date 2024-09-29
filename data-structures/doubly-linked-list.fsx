@@ -55,16 +55,14 @@ module DLL =
 
             link.next <- e
 
-    let printForward (dlist: DList<'T>) : unit =
-        match dlist.front with
+    let rec printForward (node: DListAux<'T> option) =
+        match node with
         | None -> ()
-        | Some(dListAux: DListAux<'T>) ->
-            let mutable node = Some dListAux
+        | Some n ->
+            printfn "%A" n.data
+            printForward n.next
 
-            while (Option.isSome node) do
-                let node' = Option.get node
-                printfn "%A" node'.data
-                node <- node'.next
+    let printForwardList (dlist: DList<'T>) = printForward dlist.front
 
 let main () : int =
     let dll = DLL.empty ()
@@ -75,7 +73,7 @@ let main () : int =
     DLL.addFront dll 4
     DLL.addBack dll 16
     DLL.addBack dll 17
-    DLL.printForward dll
+    DLL.printForwardList dll
 
     0
 
